@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggy.Models", "Ziggy.Models\Ziggy.Models.csproj", "{A3FF1052-5115-4031-9B74-8B96C6551340}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggy.ViewModels", "Ziggy.ViewModels\Ziggy.ViewModels.csproj", "{88CFB6C7-C6EC-43DC-9BE2-51A9A8BEF5EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggy.Views", "Ziggy.Views\Ziggy.Views.csproj", "{1EFC8F7E-8FAD-4D30-9C39-93E43AA86219}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ziggy.Factories", "Ziggy.Factories\Ziggy.Factories.csproj", "{848CC007-C03A-4A51-8394-9B92770111A6}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://lind-i.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Ziggy.Factories\\Ziggy.Factories.csproj
+		SccProjectName1 = Ziggy.Factories
+		SccLocalPath1 = Ziggy.Factories
+		SccProjectUniqueName2 = Ziggy.Models\\Ziggy.Models.csproj
+		SccProjectName2 = Ziggy.Models
+		SccLocalPath2 = Ziggy.Models
+		SccProjectUniqueName3 = Ziggy.ViewModels\\Ziggy.ViewModels.csproj
+		SccProjectName3 = Ziggy.ViewModels
+		SccLocalPath3 = Ziggy.ViewModels
+		SccProjectUniqueName4 = Ziggy.Views\\Ziggy.Views.csproj
+		SccProjectName4 = Ziggy.Views
+		SccLocalPath4 = Ziggy.Views
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3FF1052-5115-4031-9B74-8B96C6551340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3FF1052-5115-4031-9B74-8B96C6551340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3FF1052-5115-4031-9B74-8B96C6551340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3FF1052-5115-4031-9B74-8B96C6551340}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88CFB6C7-C6EC-43DC-9BE2-51A9A8BEF5EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88CFB6C7-C6EC-43DC-9BE2-51A9A8BEF5EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88CFB6C7-C6EC-43DC-9BE2-51A9A8BEF5EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88CFB6C7-C6EC-43DC-9BE2-51A9A8BEF5EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EFC8F7E-8FAD-4D30-9C39-93E43AA86219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EFC8F7E-8FAD-4D30-9C39-93E43AA86219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EFC8F7E-8FAD-4D30-9C39-93E43AA86219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EFC8F7E-8FAD-4D30-9C39-93E43AA86219}.Release|Any CPU.Build.0 = Release|Any CPU
+		{848CC007-C03A-4A51-8394-9B92770111A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{848CC007-C03A-4A51-8394-9B92770111A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{848CC007-C03A-4A51-8394-9B92770111A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{848CC007-C03A-4A51-8394-9B92770111A6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
