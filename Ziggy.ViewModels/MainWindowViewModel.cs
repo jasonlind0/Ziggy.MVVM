@@ -18,31 +18,8 @@ namespace Ziggy.ViewModels
     {
         private HashSet<string> AddressesOpen { get; set; }
         private string address = "01";
-        public string Address
-        {
-            get { return this.address; }
-            set
-            {
-                int v;
-                if (value.Length == 2 && int.TryParse(value, out v) && v >= 1 && v <= 32)
-                {
-                    SetProperty(ref this.address, value);
-                    IsAddressValid = true;
-                }
-                else
-                    IsAddressValid = false;
-            }
-        }
-        private bool isAddressValid = true;
-        public bool IsAddressValid
-        {
-            get { return this.isAddressValid && !AddressesOpen.Contains(this.Address); }
-            set
-            {
-                this.isAddressValid = value;
-                this.OnPropertyChanged(() => this.IsAddressValid);//always call because we're also checking the return value against the hashset
-            }
-        }
+        public StringState Address { get; private set; }
+        public ValidationState IsAddressValid { get; private set; }
         public ObservableCollection<QDMViewModel> QDMConnections { get; private set; }
         private IDispatcher Dispatcher { get; set; }
         public DelegateCommand Connect { get; private set; }
@@ -56,9 +33,20 @@ namespace Ziggy.ViewModels
         }
         public MainWindowViewModel(IDispatcher dispatcher)
         {
+            IsAddressValid = new ValidationState(true, false);
+            Address = new StringState(str => address = str, () => address, validationState: this.IsAddressValid, initialValue: address, validate: str =>
+            {
+                int v;
+                var isValid = (str.Length == 2 && int.TryParse(str, out v) && v >= 1 && v <= 32);
+                if (!isValid)
+                    return new Tuple<bool, string>(false, "Channel out of range");
+                if (AddressesOpen.Contains(str))
+                    return new Tuple<bool, string>(false, "Channel is already open");
+                return new Tuple<bool, string>(true, null);
+            });
             AddressesOpen = new HashSet<string>();
             this.Dispatcher = dispatcher;
-            Connect = new DelegateCommand(() => DoConnect(), () => IsAddressValid);
+            Connect = new DelegateCommand(() => DoConnect(), () => IsAddressValid.IsValid);
             QDMConnections = new ObservableCollection<QDMViewModel>();
             Disconnect = new DelegateCommand<QDMViewModel>(qdm =>
             {
@@ -67,21 +55,21 @@ namespace Ziggy.ViewModels
                 this.AddressesOpen.Remove(qdm.Address);
                 this.OnPropertyChanged(() => this.IsAddressValid);
             });
-            this.PropertyChanged += MainWindowViewModel_PropertyChanged;
+            this.IsAddressValid.PropertyChanged += IsAddressValid_PropertyChanged;
             this.ConnectError = new InteractionRequest<INotification>();
         }
 
-        void MainWindowViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        void IsAddressValid_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "IsAddressValid")
-                Connect.RaiseCanExecuteChanged();
+            if (e.PropertyName == "IsValid")
+                this.Connect.RaiseCanExecuteChanged();
         }
 
         private async void DoConnect()
         {
-            this.AddressesOpen.Add(this.Address);
-            this.OnPropertyChanged(() => this.IsAddressValid);
-            var address = this.Address;
+            var address = this.Address.Value;
+            this.AddressesOpen.Add(address);
+            this.IsAddressValid.SetInvalid("Channel connected");
             await Task.Yield();
             try
             {
