@@ -177,32 +177,31 @@ namespace Ziggy.ViewModels
         public override string StringValue
         {
             get { return this.Value != null ? this.Value.ToString() : null; }
-            set { this.Value = ParseValue(value); }
+            set
+            {
+                try
+                {
+                    this.Value = ParseValue(value);
+                }
+                catch (Exception ex)
+                {
+                    if (this.IsValid != null)
+                        this.IsValid.SetInvalid(ex.Message);
+                }
+            }
         }
     }
     public class DoubleState : State<double?>
     {
         public DoubleState(Action<double?> setValue, Func<double?> getValue, Action valueSet = null, ValidationState validationState = null, double? initialValue = null, Func<double?, Tuple<bool, string>> validate = null) :
             base(setValue, getValue,
-                str =>
-                {
-                    double v;
-                    if (double.TryParse(str, out v))
-                        return v;
-                    return null;
-                }, valueSet, validationState, initialValue, validate) { }
+                str => str != null ? double.Parse(str) : null as double?, valueSet, validationState, initialValue, validate) { }
     }
     public class IntegerState : State<int?>
     {
         public IntegerState(Action<int?> setValue, Func<int?> getValue, Action valueSet = null, ValidationState validationState = null, int? initialValue = null, Func<int?, Tuple<bool, string>> validate = null) :
             base(setValue, getValue,
-                str =>
-                {
-                    int v;
-                    if (int.TryParse(str, out v))
-                        return v;
-                    return null;
-                }, valueSet, validationState, initialValue, validate) { }
+             str => str != null ? int.Parse(str) : null as int?, valueSet, validationState, initialValue, validate) { }
     }
     public class StringState : State<string>
     {
